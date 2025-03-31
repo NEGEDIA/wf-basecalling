@@ -85,7 +85,8 @@ process dorado {
         ${poly_a_args} \
         ${barcode_kit_args} \
         ${demux_args} \
-        --device ${params.cuda_device} | samtools view --no-PG -b -o ${chunk_idx}.ubam -
+        --device ${params.cuda_device} > output.sam
+    samtools view --no-PG -b -o ${chunk_idx}.ubam output.sam
 
     # CW-2569: delete the pod5s, if emit not required.
     if [[ "${params.duplex}" == "true" && "${params.dorado_ext}" == "fast5" ]]; then
